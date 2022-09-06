@@ -49,5 +49,7 @@ dependencies {
     // add
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'com.sqareup.retrofit2:retrofit:2.8.1'
+    implementation 'com.sqareup.retrofit2:converter-gson:2.8.1'
 
 }
