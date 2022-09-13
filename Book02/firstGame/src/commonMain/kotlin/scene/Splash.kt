@@ -4,6 +4,7 @@ import com.soywiz.korge.input.*
 import com.soywiz.korge.scene.*
 import com.soywiz.korge.ui.*
 import com.soywiz.korge.view.*
+import com.soywiz.korim.color.*
 import com.soywiz.korio.async.*
 import com.soywiz.korma.geom.*
 
@@ -30,6 +31,17 @@ class Splash() : Scene() {
         uiButton("Go to Menu", null, buttonWidth, buttonHeight) {
             position(buttonPos)
             onClick {
+                launchImmediately { sceneContainer.changeTo<Menu>() }
+            }
+        }
+        //加入更多文字
+        text("tap to start") {
+            val screenWidth = ConfigModule.size.width.toDouble()
+            val screenHeight = ConfigModule.size.height.toDouble()
+            position((screenWidth - scaledWidth)/2, (screenHeight - scaledHeight)/4)
+            textSize = 30.0
+            color = Colors.BLUE
+            onClick{
                 launchImmediately { sceneContainer.changeTo<Menu>() }
             }
         }
