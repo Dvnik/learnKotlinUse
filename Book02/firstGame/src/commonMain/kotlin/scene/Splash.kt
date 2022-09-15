@@ -3,6 +3,7 @@ package scene
 import com.soywiz.klock.*
 import com.soywiz.korge.input.*
 import com.soywiz.korge.scene.*
+import com.soywiz.korge.tween.*
 import com.soywiz.korge.ui.*
 import com.soywiz.korge.view.*
 import com.soywiz.korim.bitmap.*
@@ -17,7 +18,8 @@ class Splash() : Scene() {
     val buttonWidth = 256.0
     val buttonHeight = 32.0
     val buttonPos = Point(128, 128 + 32)
-
+    val screenWidth = ConfigModule.size.width.toDouble()
+    val screenHeight = ConfigModule.size.height.toDouble()
     override suspend fun SContainer.sceneInit() {
         //顯示目前的畫面
         text("I'm in ${Splash::class.simpleName}") {
@@ -62,24 +64,41 @@ class Splash() : Scene() {
             )
         }
         val tapString = image(bitmap) {
-            val screenWidth = ConfigModule.size.width.toDouble()
-            val screenHeight = ConfigModule.size.height.toDouble()
+
             position((screenWidth - scaledWidth) / 2, (screenHeight - scaledHeight) / 4)
 
             onClick {
                 launchImmediately { sceneContainer.changeTo<Menu>() }
             }
         }
+        var moveHeight = screenHeight - (screenHeight / 4)
         //啟用動畫
-        launchImmediately {
-            while(true) {
-                tapString.alpha -= 0.1//減少0.1 alpha
-                if (tapString.alpha <= 0) {
-                    tapString.alpha = 1.0
-                }
-
-                delay(100.milliseconds)
+//        launchImmediately {
+//            while(true) {
+//                tapString.alpha -= 0.1//減少0.1 alpha
+//                if (tapString.alpha <= 0) {
+//                    tapString.alpha = 1.0
+//                }
+//
+//                delay(100.milliseconds)
+//            }
+//        }
+        // 用內建的addFixedUpdater方法啟用動畫
+        addFixedUpdater(100.milliseconds) {
+            tapString.alpha -= 0.1//減少0.1 alpha
+            if (tapString.alpha <= 0) {
+                tapString.alpha = 1.0
             }
+//            if (tapString.y < moveHeight) {
+//                tapString.y += 20// 座標y增加20
+//            }
+//            else {
+//                tapString.y -= 200//退回最後的位置200，結果會看見反覆動畫。
+//            }
+
         }
+        //不能包在addFixedUpdater裡面
+        tapString.tween(tapString::y[tapString.y, moveHeight], time = 100.milliseconds)
+
     }
 }
