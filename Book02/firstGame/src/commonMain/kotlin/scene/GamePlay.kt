@@ -2,6 +2,7 @@ package scene
 
 import ConfigModule
 import com.soywiz.klock.*
+import com.soywiz.korev.*
 import com.soywiz.korge.input.*
 import com.soywiz.korge.scene.*
 import com.soywiz.korge.tween.*
@@ -43,6 +44,27 @@ class GamePlay() : Scene() {
 //            delay(1.seconds)
 //        }
 
+
+        val input = views.input
+
+        text("") {
+            text = "Mouse Position:${input.mouse}"
+            position(input.mouse.x, input.mouse.y)
+        }
+
+        text("").addUpdater {
+            when {
+                input.keys.justPressed(Key.SPACE) -> {
+                    println("Key just pressed.")
+                }
+                input.keys.pressing(Key.SPACE) -> {
+                    println("Key pressing.")
+                }
+                input.keys.justReleased(Key.SPACE) -> {
+                    println("Key justReleased.")
+                }
+            }
+        }
         //顯示目前的畫面
         text("I'm in ${GamePlay::class.simpleName}") {
             position(textPos)
