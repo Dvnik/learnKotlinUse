@@ -21,6 +21,29 @@ class GamePlay() : Scene() {
     val buttonPos = Point(128, 128 + 32)
 
     override suspend fun SContainer.sceneInit() {
+        mouse {
+            click {
+                println("mouse click")
+            }
+            over {
+                println("mouse over")
+            }
+            down {
+                println("mouse down")
+            }
+            up {
+                println("mouse up")
+            }
+        }
+
+        keys {
+            down(Key.SPACE) {
+                println("key down")
+            }
+            up(Key.SPACE) {
+                println("key up")
+            }
+        }
         //加入Sprite Animation圖片
         val spirteMap = resourcesVfs["green_alien_walk.png"].readBitmap()
         val alienWalkAnimation = SpriteAnimation(
