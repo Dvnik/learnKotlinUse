@@ -4,6 +4,38 @@ import com.soywiz.korge.input.*
 import com.soywiz.korge.scene.*
 import com.soywiz.korge.ui.*
 import com.soywiz.korge.view.*
+import com.soywiz.korio.async.*
+import com.soywiz.korma.geom.*
+
+class Menu() : Scene() {
+    val textPos = Point(128, 128)
+    val buttonWidth = 256.0
+    val buttonHeight = 32.0
+    val buttonPos = Point(128, 128 + 32)
+
+    override suspend fun SContainer.sceneInit() {
+        //顯示目前的畫面
+        text("I'm in ${Menu::class.simpleName}") {
+            position(textPos)
+        }
+        // 更換新版的Button物件
+        uiButton("Go to GamePlay", null, buttonWidth, buttonHeight) {
+            position(buttonPos)
+            onClick {
+                launchImmediately { sceneContainer.changeTo<GamePlay>() }
+            }
+        }
+    }
+}
+/**
+ * 還原乾淨的畫面，以及紀錄之前章節試過的程式碼，
+ * 將前幾章用到的物件飯粒都註解於此：
+
+
+import com.soywiz.korge.input.*
+import com.soywiz.korge.scene.*
+import com.soywiz.korge.ui.*
+import com.soywiz.korge.view.*
 import com.soywiz.korge.view.onClick
 import com.soywiz.korim.format.*
 import com.soywiz.korio.async.*
@@ -42,3 +74,7 @@ class Menu() : Scene() {
         }
     }
 }
+ *
+ *
+ *
+ */
