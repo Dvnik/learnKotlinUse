@@ -8,6 +8,7 @@ import com.soywiz.korim.format.*
 import com.soywiz.korio.async.*
 import com.soywiz.korio.file.std.*
 import com.soywiz.korma.geom.*
+import gameplay.*
 
 class GamePlay() : Scene() {
     val textPos = Point(128, 128)
@@ -16,11 +17,7 @@ class GamePlay() : Scene() {
     val buttonPos = Point(128, 128 + 32)
 
     override suspend fun SContainer.sceneInit() {
-        //加入圖片
-        image(resourcesVfs["KenneyArt/gameplay_bg_castle.png"].readBitmap()) {
-            scaledWidth = ConfigModule.size.width.toDouble()
-            scaledHeight = ConfigModule.size.height.toDouble()
-        }
+        addChild(Background().apply { load() })
         //顯示目前的畫面
         text("I'm in ${GamePlay::class.simpleName}") {
             position(textPos)
