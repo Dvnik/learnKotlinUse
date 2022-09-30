@@ -17,7 +17,15 @@ class GamePlay() : Scene() {
     val buttonPos = Point(128, 128 + 32)
 
     override suspend fun SContainer.sceneInit() {
+        // 加入到遊戲背景到場景
         addChild(Background().apply { load() })
+        val parentView = this
+        //物件管理
+        ItemManager.run {
+            init()//初始所有物件
+            load(parentView)//加入物件到場景
+        }
+
         //顯示目前的畫面
         text("I'm in ${GamePlay::class.simpleName}") {
             position(textPos)

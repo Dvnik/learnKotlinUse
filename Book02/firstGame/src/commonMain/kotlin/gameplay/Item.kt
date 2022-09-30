@@ -9,7 +9,7 @@ abstract class Item: Container() {
 
     var movespeed = 4//移動速度
 
-    var defaultx = 0.0//初始×位置
+    var defaultX = 0.0//初始×位置
 
     var mImage: Image? = null
     //物件圖片
@@ -21,3 +21,4 @@ abstract class Item: Container() {
     }
 
 }
+
